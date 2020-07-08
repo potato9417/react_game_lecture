@@ -11,23 +11,63 @@
 <body>
     <div id="root"></div> <!-- 결과 : <div id="root"><button>Like!</button></div>-->
     <script type="text/babel">
-        class LikeButton extends React.Component{
+        class GuGuDan extends React.Component{
             constructor(props){
                 super(props)
                 this.state={
-                    liked:false
+                    firstNum:Math.floor(Math.random()*9)+1,
+                    secondNum:Math.floor(Math.random()*9)+1,
+                    value:"",
+                    result:""
+                }
+            }
+
+            changeValue=(e)=>{
+                this.setState({value:e.target.value})
+            }
+
+            checkResult=(e)=>{
+                const {firstNum,secondNum,value,result}=this.state
+                e.preventDefault();
+                console.log(value)
+                if(value===""){
+                    this.setState({result:"값을 입력해주세요."})
+                }
+                if(firstNum*secondNum===JSON.parse(value)){
+                    this.setState({
+                        firstNum:Math.floor(Math.random()*9)+1,
+                        secondNum:Math.floor(Math.random()*9)+1,
+                        value:"",
+                        result:"정답!"
+                    })
+                }
+                else{
+                    this.setState({
+                        value:"",
+                        result:"땡!"
+                    })
                 }
             }
 
             render(){
-                return <button type="submit" onClick={()=>{this.setState({liked:true})}}>{this.state.liked===true?"Liked":"Like"}</button>
-                // JSX => JS + XML
+                const {firstNum,secondNum,value,result}=this.state
+                return (
+                    <div>
+                        <h2>구구단</h2>
+                        <h3>{firstNum} 곱하기 {secondNum}는?</h3>
+                        <form>
+                            <input value={value} type="number" onChange={this.changeValue}/>
+                            <button onClick={this.checkResult}>확인</button>
+                        </form>
+                        <p>{result}</p>
+                    </div>
+                )
             }
         }
 
     </script>
     <script type="text/babel">
-        ReactDOM.render(<div><LikeButton /><LikeButton /><LikeButton /><LikeButton /></div>,document.querySelector("#root"))
+        ReactDOM.render(<div><GuGuDan /></div>,document.querySelector("#root"))
     </script>
 </body>
 </html>
