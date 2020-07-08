@@ -1,0 +1,27 @@
+{
+  "name": "lecture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/potato9417/react_game_lecture.git"
+  },
+  "author": "kamza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/potato9417/react_game_lecture/issues"
+  },
+  "homepage": "https://github.com/potato9417/react_game_lecture#readme",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
+}
