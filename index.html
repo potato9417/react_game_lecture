@@ -18,7 +18,9 @@
                     firstNum:Math.floor(Math.random()*9)+1,
                     secondNum:Math.floor(Math.random()*9)+1,
                     value:"",
-                    result:""
+                    result:"값을 입력해주세요.",
+                    rightCount:0,
+                    wrongCount:0
                 }
             }
 
@@ -34,32 +36,42 @@
                     this.setState({result:"값을 입력해주세요."})
                 }
                 if(firstNum*secondNum===JSON.parse(value)){
-                    this.setState({
-                        firstNum:Math.floor(Math.random()*9)+1,
-                        secondNum:Math.floor(Math.random()*9)+1,
-                        value:"",
-                        result:"정답!"
+                    this.setState((prevState)=>{
+                        return{
+                            firstNum:Math.floor(Math.random()*9)+1,
+                            secondNum:Math.floor(Math.random()*9)+1,
+                            value:"",
+                            result:"정답 : " + prevState.value,
+                            rightCount:prevState.rightCount+1
+                        }
                     })
                 }
                 else{
-                    this.setState({
-                        value:"",
-                        result:"땡!"
+                    this.setState((prevState)=>{
+                        return{
+                            value:"",
+                            result:"땡!",
+                            wrongCount:prevState.wrongCount+1
+                        }
                     })
                 }
+                this.input.focus()
             }
+            input;
 
             render(){
-                const {firstNum,secondNum,value,result}=this.state
+                const {firstNum,secondNum,value,result,rightCount,wrongCount}=this.state
                 return (
                     <div>
                         <h2>구구단</h2>
                         <h3>{firstNum} 곱하기 {secondNum}는?</h3>
                         <form>
-                            <input value={value} type="number" onChange={this.changeValue}/>
+                            <input ref={props=>{this.input=props}} value={value} type="number" onChange={this.changeValue}/>
                             <button onClick={this.checkResult}>확인</button>
                         </form>
                         <p>{result}</p>
+                        <p>정답 {rightCount} 회</p>
+                        <p>오류 {wrongCount} 회</p>
                     </div>
                 )
             }
