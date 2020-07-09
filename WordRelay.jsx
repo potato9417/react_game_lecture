@@ -36,7 +36,7 @@ class WordRelay extends React.Component{
                 <h2>끝말잇기 게임</h2>
                 <h3>{word}</h3>
                 <input ref={this.inputRef} type="text" value={value} onChange={this.changeInput}/>
-                <button onClick={this.checkResult}>확인</button>
+                <button onClick={this.checkResult}>확인!!</button>
                 <p>{result}</p>
             </div>
         )

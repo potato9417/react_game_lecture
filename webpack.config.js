@@ -19,7 +19,11 @@ module.exports={
             loader: "babel-loader",
             options:{
                 presets:["@babel/preset-env", "@babel/preset-react"],
-                plugins:["@babel/plugin-syntax-class-properties","@babel/plugin-proposal-class-properties"]
+                plugins:[
+                    "@babel/plugin-syntax-class-properties",
+                    "@babel/plugin-proposal-class-properties",
+                    "react-hot-loader/babel"
+                ]
             } // preset : plugin의 모음
         }]
     }, // entry와 output사이를 연결해주는 (규칙)연결고리같은 것
@@ -31,9 +35,14 @@ module.exports={
 };
 
 // 이대로는 실행이 안되고 위처럼 입력 후 webpack사용하는 방법
-// 1. package.json에 가서 script부분에 dev: "webpack" 입력 
+// 1. package.json에 가서 script부분에 "dev": "webpack" 입력 
 //    => webpack이 명령어로 등록되어있지않아서 입력하지않으면 webpack실행안됨 => npm run dev 입력
 // 2. npx webpack을 입력
 
 // webpack은 기본 js기반이라 babel을 통해 jsx를 인식시켜줘야함
 // npm i -D @babel/core @babel/preset-env @babel/preset-react babel-loader
+
+// 자동으로 webpack 실행되도록 현재 컴퓨터에 개발서버를 열어주는것
+// 1. npm i -D react-hot-loader webpack-dev-server
+// 2. package.json에 가서 script부분에 "dev": "webpack-dev-server --hot" 로 변경
+// 3. client.jsx랑 webpack.config.js에서 plugin부분 수정
