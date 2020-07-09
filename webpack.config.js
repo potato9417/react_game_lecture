@@ -20,9 +20,9 @@ module.exports={
             options:{
                 presets:["@babel/preset-env", "@babel/preset-react"],
                 plugins:["@babel/plugin-syntax-class-properties","@babel/plugin-proposal-class-properties"]
-            }
+            } // preset : plugin의 모음
         }]
-    },
+    }, // entry와 output사이를 연결해주는 (규칙)연결고리같은 것
 
     output:{
         path: path.join(__dirname,"dist"), // 경로찾기 : 현재 폴더 안에 들어있는 dist폴더를 찾아줌
