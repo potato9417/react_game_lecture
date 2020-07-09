@@ -15,11 +15,11 @@ module.exports={
 
     module:{
         rules: [{
-            test: /\.jsx?/,
+            test: /\.jsx?$/,
             loader: "babel-loader",
             options:{
                 presets:["@babel/preset-env", "@babel/preset-react"],
-                plugins:["@babel/plugin-syntax-class-properties"]
+                plugins:["@babel/plugin-syntax-class-properties","@babel/plugin-proposal-class-properties"]
             }
         }]
     },
