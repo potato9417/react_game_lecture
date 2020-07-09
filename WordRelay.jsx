@@ -1,6 +1,6 @@
 const React = require("react")
 
-class Wordrelay extends React.Component{
+class WordRelay extends React.Component{
     state={
         name:"Hello! webpack"
     }
@@ -12,4 +12,4 @@ class Wordrelay extends React.Component{
     }
 }
 
-module.exports=Wordrelay
+module.exports = WordRelay;
