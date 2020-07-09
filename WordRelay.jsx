@@ -8,11 +8,20 @@ class WordRelay extends React.Component{
     }
 
     changeInput=(e)=>{
+        this.setState({value:e.target.value})
     }
 
     checkResult=(e)=>{
+        const {word,value,result}=this.state
         e.preventDefault();
         console.log("click")
+        if(word[word.length-1]===value[0]){
+            this.setState({word:value,result:"정답입니다!",value:""})
+        }
+        else{
+            this.setState({result:"틀렸습니다!",value:""})
+        }
+        this.input.focus();
     }
     input;
 
