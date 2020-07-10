@@ -12,6 +12,7 @@ const App=()=>{
     return(
         <BrowserRouter>
             <Nav />
+            <Route path="/" exact={true} />
             <Route path="/gugudan" component={Gugudan}/>
             <Route path="/word_relay" component={WordRelay}/>
             <Route path="/number_baseball" component={NumberBaseball} />
