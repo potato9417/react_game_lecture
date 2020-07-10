@@ -1,46 +1,38 @@
 const React = require("react")
 
-class WordRelay extends React.Component{
-    state={
-        word:"고양이",
-        value:"",
-        result:""
+const WordRelay=()=>{
+    const [word,setWord]=React.useState("고양이");
+    const [value,setValue]=React.useState("");
+    const [result,setResult]=React.useState("");
+    const inputRef=React.useRef(null)
+
+    const changeInput=(e)=>{
+        setValue(e.target.value)
     }
 
-    changeInput=(e)=>{
-        this.setState({value:e.target.value})
-    }
-
-    checkResult=(e)=>{
-        const {word,value,result}=this.state
+    const checkResult=(e)=>{
         e.preventDefault();
         console.log("click")
         if(word[word.length-1]===value[0]){
-            this.setState({word:value,result:"정답입니다!",value:""})
+            setWord(value)
+            setResult("정답입니다")
         }
         else{
-            this.setState({result:"틀렸습니다!",value:""})
+            setResult("틀렸습니다.")
         }
-        this.input.focus();
-    }
-    input;
-
-    inputRef=(e)=>{
-        this.input=e;
+        setValue("")
+        inputRef.current.focus()
     }
 
-    render(){
-        const {word,value,result}=this.state
-        return(
-            <div>
-                <h2>끝말잇기 게임</h2>
-                <h3>{word}</h3>
-                <input ref={this.inputRef} type="text" value={value} onChange={this.changeInput}/>
-                <button onClick={this.checkResult}>확인!!</button>
-                <p>{result}</p>
-            </div>
-        )
-    }
+    return(
+        <div>
+            <h2>끝말잇기 게임</h2>
+            <h3>{word}</h3>
+            <input ref={inputRef} type="text" value={value} onChange={changeInput}/>
+            <button onClick={checkResult}>확인!!</button>
+            <p>{result}</p>
+        </div>
+    )
 }
 
 module.exports = WordRelay;
