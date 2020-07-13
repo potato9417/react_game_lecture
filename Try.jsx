@@ -4,8 +4,11 @@ class Try extends React.Component{
     render(){
         return(
             <li>
-                {this.props.tryInfo.try}
+                <p>{this.props.tryInfo.tryNum}</p>
+                <p>{this.props.tryInfo.result}</p>
             </li>
         )
     }
 }
+
+export default Try

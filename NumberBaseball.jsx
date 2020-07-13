@@ -68,17 +68,16 @@ class NumberBaseball extends React.Component{
     }
 
     render(){
-        const {number,value,result,tries}=this.state
+        const {number,value,tries}=this.state
         return (
             <div>
                 <h2>숫자야구</h2>
                 <h3>네자리 숫자를 맞춰주세요 {number}</h3>
                 <input maxLength={4} type="number" value={value} onChange={this.changeInput}/>
                 <button onClick={this.checkResult}>확인</button>
-                <p>{result}</p>
-                <p>시도횟수 : {tryCount.length}</p>
                 <ul>
-                    <Try />
+                    {tries.map((props,i)=>{
+                        <Try key={`${i+1}차시도:`} tryInfo={props} />})}
                 </ul>
             </div>
         )
