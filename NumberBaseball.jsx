@@ -1,12 +1,9 @@
 const React = require("react")
 
-const getNum=()=>{
-
-}
 
 class NumberBaseball extends React.Component{
     state={
-        number:getNum(),
+        number:0,
         value:"",
         result:"",
         tryCount:[]
@@ -26,11 +23,25 @@ class NumberBaseball extends React.Component{
         return (
             <div>
                 <h2>숫자야구</h2>
-                <h3>네자리 숫자를 맞춰주세요{JSON.parse(number)}</h3>
+                <h3>네자리 숫자를 맞춰주세요</h3>
                 <input maxLength={4} type="number" value={value} onChange={this.changeInput}/>
                 <button onClick={this.checkResult}>확인</button>
                 <p>{result}</p>
                 <p>시도횟수 : {tryCount.length}</p>
+                <ul>
+                    {/* {[
+                        {fruit:"사과",taste:"달다"},
+                        {fruit:"딸기",taste:"맛있다"},
+                        {fruit:"키위",taste:"새콤하다"},
+                        {fruit:"귤",taste:"시다"},
+                        {fruit:"포도",taste:"달다"},
+                        {fruit:"복숭아",taste:"말랑하다"},
+                        {fruit:"오렌지",taste: "달다"},
+                        {fruit:"딸기",taste:"맛있다"},
+                    ].map((props,index)=>{
+                        return <li key={index}><b>{props.fruit}</b> => {props.taste}</li>
+                    })} */}
+                </ul>
             </div>
         )
     }
