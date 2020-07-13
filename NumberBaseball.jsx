@@ -29,7 +29,7 @@ class NumberBaseball extends React.Component{
                 <p>{result}</p>
                 <p>시도횟수 : {tryCount.length}</p>
                 <ul>
-                    {/* {[
+                    {[
                         {fruit:"사과",taste:"달다"},
                         {fruit:"딸기",taste:"맛있다"},
                         {fruit:"키위",taste:"새콤하다"},
@@ -38,9 +38,9 @@ class NumberBaseball extends React.Component{
                         {fruit:"복숭아",taste:"말랑하다"},
                         {fruit:"오렌지",taste: "달다"},
                         {fruit:"딸기",taste:"맛있다"},
-                    ].map((props,index)=>{
-                        return <li key={index}><b>{props.fruit}</b> => {props.taste}</li>
-                    })} */}
+                    ].map((props)=>{
+                        return <li key={props.fruit+props.taste}><b>{props.fruit}</b> => {props.taste}</li>
+                    })}
                 </ul>
             </div>
         )
