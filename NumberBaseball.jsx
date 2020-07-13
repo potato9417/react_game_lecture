@@ -1,12 +1,23 @@
 const React = require("react")
 
+const getNum=()=>{
+    const numArr = [0,1,2,3,4,5,6,7,8,9]
+    const getNumArr =[];
+
+    for(let i=0;i<4;i++){
+        const choiceNum = numArr.splice(Math.floor(Math.random()*(9-i)),1)[0]
+        getNumArr.push(choiceNum)
+    }
+    // console.log(getNumArr)
+    return getNumArr
+}
 
 class NumberBaseball extends React.Component{
     state={
-        number:0,
+        number:getNum(),
         value:"",
         result:"",
-        tryCount:[]
+        try:[]
     }
 
     changeInput=(e)=>{
@@ -15,7 +26,14 @@ class NumberBaseball extends React.Component{
 
     checkResult=(e)=>{
         e.preventDefault();
+        const {number,value,result,tryCount}=this.state
         console.log("click")
+        if(value===number.join("")){
+            this.setState({
+                result:"홈런!",
+                try:[...this.state.try, {tryNum:value,result:"홈런!"}]
+            })
+        }
     }
 
     render(){
@@ -23,24 +41,13 @@ class NumberBaseball extends React.Component{
         return (
             <div>
                 <h2>숫자야구</h2>
-                <h3>네자리 숫자를 맞춰주세요</h3>
+                <h3>네자리 숫자를 맞춰주세요 {number}</h3>
                 <input maxLength={4} type="number" value={value} onChange={this.changeInput}/>
                 <button onClick={this.checkResult}>확인</button>
                 <p>{result}</p>
                 <p>시도횟수 : {tryCount.length}</p>
                 <ul>
-                    {[
-                        {fruit:"사과",taste:"달다"},
-                        {fruit:"딸기",taste:"맛있다"},
-                        {fruit:"키위",taste:"새콤하다"},
-                        {fruit:"귤",taste:"시다"},
-                        {fruit:"포도",taste:"달다"},
-                        {fruit:"복숭아",taste:"말랑하다"},
-                        {fruit:"오렌지",taste: "달다"},
-                        {fruit:"딸기",taste:"맛있다"},
-                    ].map((props)=>{
-                        return <li key={props.fruit+props.taste}><b>{props.fruit}</b> => {props.taste}</li>
-                    })}
+                     
                 </ul>
             </div>
         )
