@@ -16,6 +16,7 @@ const NumberBaseball=()=>{
     const [number,setNumber]=React.useState(getNum())
     const [value,setValue]=React.useState("")
     const [tries,setTries]=React.useState([])
+    const inputRef=React.useRef(null)
 
     const changeInput=(e)=>{
         setValue(e.target.value)
@@ -60,13 +61,14 @@ const NumberBaseball=()=>{
                 
             }
         }
+        inputRef.current.focus()
     }
 
     return (
         <div>
             <h2>숫자야구</h2>
             <h3>네자리 숫자를 맞춰주세요 {number}</h3>
-            <input maxLength="4" type="number" value={value} onChange={changeInput}/>
+            <input  ref={inputRef} type="number" value={value} onChange={changeInput}/>
             <button onClick={checkResult}>확인</button>
             <p>{tries.length}회 시도</p>
             <ul>
@@ -82,7 +84,10 @@ const NumberBaseball=()=>{
         </div>
     )
     
-
 }
+
+// render가 반복되는것을 방지하기위해서 사용
+// PureComponent, shouldComponentUpdate => class component
+// React.memo => function component 
 
 module.exports=NumberBaseball

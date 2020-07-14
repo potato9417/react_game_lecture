@@ -8,6 +8,7 @@ const Nav=()=>{
             <Link to="/gugudan">구구단</Link>
             <Link to="/word_relay">끝말잇기</Link>
             <Link to="/number_baseball">숫자야구</Link>
+            <Link to="/response_check">반응속도체크</Link>
         </div>
     )
 }
