@@ -43,11 +43,10 @@ class NumberBaseball extends React.Component{
             })
         }
         else {
-            const answerArr = value.split("").map((props)=>{
-                parseInt(props)
-            })
+            const answerArr = value.split("")
             let strike=0
             let ball=0
+            // console.log(answerArr)
 
             // 10번이상 틀렸을 경우 
             if(tries.length>=3){
@@ -56,10 +55,11 @@ class NumberBaseball extends React.Component{
             }
             else{
                 for(let i=0;i<4;i++){
-                    if(answerArr[i]===value[i]){
+                    console.log(JSON.parse(answerArr[i]),number[i])
+                    if(JSON.parse(answerArr[i])===number[i]){
                         strike+=1
                     }
-                    else if(value.includes(answerArr[i])){
+                    else if(number.includes(JSON.parse(answerArr[i]))){
                         ball+=1
                     }
                 }
@@ -76,13 +76,13 @@ class NumberBaseball extends React.Component{
             <div>
                 <h2>숫자야구</h2>
                 <h3>네자리 숫자를 맞춰주세요 {number}</h3>
-                <input maxLength={4} type="number" value={value} onChange={this.changeInput}/>
+                <input maxLength="4" type="number" value={value} onChange={this.changeInput}/>
                 <button onClick={this.checkResult}>확인</button>
                 <p>{tries.length}회 시도</p>
                 <ul>
                     {tries.map((props,index)=>{
                         return (
-                            <li>
+                            <li key={index}>
                                 <p>{props.tryNum}</p>
                                 <p>{props.result}</p>
                             </li>
