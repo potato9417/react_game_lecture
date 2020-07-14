@@ -38,7 +38,7 @@ const NumberBaseball=()=>{
             // console.log(answerArr)
 
             // 10번이상 틀렸을 경우 
-            if(tries.length>=3){
+            if(tries.length>=9){
                 alert(`기회 10번 모두 사용하셨습니다. 답은 ${number.join(",")}`)
 
                 setNumber(getNum())
