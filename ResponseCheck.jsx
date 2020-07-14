@@ -1,4 +1,4 @@
-import React from "react"
+const React = require("react")
 
 class ResponseCheck extends React.Component{
     state={
@@ -7,15 +7,16 @@ class ResponseCheck extends React.Component{
     }
 
     render(){
+        const {message}=this.state
         return(
             <div>
                 <h2>반응속도체크</h2>
                 <div id="screen" onClick={this.changeScreen}>
-                    <p>{this.message}</p>
+                    <p>{message}</p>
                 </div>
             </div>
         )
     }
 }
 
-export default React
+module.exports=ResponseCheck
