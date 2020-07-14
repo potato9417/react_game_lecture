@@ -1,5 +1,4 @@
 const React = require("react")
-const Try = require("./Try")
 
 const getNum=()=>{
     const numArr = [0,1,2,3,4,5,6,7,8,9]
@@ -43,35 +42,32 @@ class NumberBaseball extends React.Component{
                 // 배열:[기존배열,{추가할 내용}]  기존배열은 ...으로 가지고있는 모든것을 가져와야한다  => push 대신 리액트에서 변화된 배열을 체크할수있게 사용
             })
         }
-        // else {
-        //     const answerArr = value.split("").map((props)=>{
-        //         parseInt(props)
-        //     })
-        //     let strike=0
-        //     let ball=0
+        else {
+            const answerArr = value.split("").map((props)=>{
+                parseInt(props)
+            })
+            let strike=0
+            let ball=0
 
-        //     // 10번이상 틀렸을 경우 
-        //     if(tries.length>=9){
-        //         this.setState({
-        //             result:`기회 10번 모두 사용하셨습니다. 답은 ${value.join(",")}`
-        //         })
-        //         alert("게임을 다시 시작합니다.")
-        //         this.setState({number:getNum(),tries:[],value:""})
-        //     }
-        //     else{
-        //         for(let i=0;i<4;i++){
-        //             if(answerArr[i]===value[i]){
-        //                 strike+=1
-        //             }
-        //             else if(value.includes(answerArr[i])){
-        //                 ball+=1
-        //             }
-        //         }
-        //         this.setState({
-        //             tries:[...this,state,tries, {tryNum:value,rsult:`${strike}스트라이크, ${ball}볼 입니다.`,value:""}]
-        //         })
-        //     }
-        // }
+            // 10번이상 틀렸을 경우 
+            if(tries.length>=3){
+                alert(`기회 10번 모두 사용하셨습니다. 답은 ${number.join(",")}`)
+                this.setState({number:getNum(),tries:[],value:""})
+            }
+            else{
+                for(let i=0;i<4;i++){
+                    if(answerArr[i]===value[i]){
+                        strike+=1
+                    }
+                    else if(value.includes(answerArr[i])){
+                        ball+=1
+                    }
+                }
+                this.setState({
+                    tries:[...this.state.tries, {tryNum:value,result:`${strike}S, ${ball}B`}],value:""
+                })
+            }
+        }
     }
 
     render(){
@@ -84,8 +80,14 @@ class NumberBaseball extends React.Component{
                 <button onClick={this.checkResult}>확인</button>
                 <p>{tries.length}회 시도</p>
                 <ul>
-                    {tries.map((props,i)=>{
-                        <Try key={`${i+1}차시도:`} tryInfo={props} />})}
+                    {tries.map((props,index)=>{
+                        return (
+                            <li>
+                                <p>{props.tryNum}</p>
+                                <p>{props.result}</p>
+                            </li>
+                        )
+                    })}
                 </ul>
             </div>
         )
