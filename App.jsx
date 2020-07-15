@@ -7,6 +7,7 @@ const Gugudan = require( "./Gugudan")
 const Nav = require( "./Nav")
 const NumberBaseball = require("./NumberBaseball")
 const ResponseCheck = require("./ResponseCheck")
+const RSP = require("./RSP")
 
 
 const App=()=>{
@@ -18,6 +19,7 @@ const App=()=>{
             <Route path="/word_relay" component={WordRelay}/>
             <Route path="/number_baseball" component={NumberBaseball} />
             <Route path="/response_check" component={ResponseCheck} />
+            <Route path="/rsp" component={RSP} />
         </BrowserRouter>
     )
 }
