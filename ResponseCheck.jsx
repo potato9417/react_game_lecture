@@ -47,6 +47,12 @@ class ResponseCheck extends React.Component{
         }
     }
 
+    reset=()=>{
+        this.setState({
+            result:[]
+        })
+    }
+
     render(){
         const {state,message,result}=this.state
         return(
@@ -56,7 +62,11 @@ class ResponseCheck extends React.Component{
                     <p>{message}</p>
                 </div>
                 {result.length !==0 && 
-                    <h4>반응속도 : {result[result.length-1]}ms<br/>평균시간 : {result.reduce((a,c)=>a+c)/result.length}ms</h4>
+                    <div>
+                        <h4>반응속도 : {result[result.length-1]}ms</h4>
+                        <h4>평균시간 : {result.reduce((a,c)=>a+c)/result.length}ms</h4>
+                        <button onClick={this.reset}>초기화</button>
+                    </div>
                 }
             </div>
         )
