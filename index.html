@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React Game</title>
+    <style>
+        #screen {
+            width: 300px;
+            height: 200px;
+            text-align: centert;
+            user-select: none;
+        }
+        #screen.waiting {
+            background-color: rgb(234, 129, 255);
+        }
+        #screen.ready {
+            background-color: rgb(25, 68, 255);
+            color: #fff;
+        }
+        #screen.now {
+            background-color: rgb(177, 255, 87);
+        }
+    </style>
 </head>
 <body>
     <div id="root"></div>
