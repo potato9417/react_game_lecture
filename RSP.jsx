@@ -69,8 +69,9 @@ class RSP extends React.Component{
     componentWillUnmount(){
         clearInterval(this.interval)
     }
-
-    clickBtn=(choice)=>{
+    
+    // 고차함수
+    clickBtn=(choice)=>()=>{
         const {imgCoord}=this.state
         clearInterval(this.interval)
         const myScore=scores[choice]
@@ -116,9 +117,9 @@ class RSP extends React.Component{
                 <h2>가위바위보</h2>
                 <div id="computer" style={{background:`url(http://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0`}} />
                 <div>
-                    <button id="rock" onClick={()=>{this.clickBtn("rock")}}>바위</button>
-                    <button id="scissor" onClick={()=>{this.clickBtn("scissor")}}>가위</button>
-                    <button id="paper" onClick={()=>{this.clickBtn("paper")}}>보</button>
+                    <button id="rock" onClick={this.clickBtn("rock")}>바위</button>
+                    <button id="scissor" onClick={this.clickBtn("scissor")}>가위</button>
+                    <button id="paper" onClick={this.clickBtn("paper")}>보</button>
                 </div>
                 <div>
                     <p>{result}</p>
