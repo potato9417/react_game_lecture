@@ -1,8 +1,8 @@
 const React=require("react")
 
-class Ball extends React.Component{
+class Ball extends React.PureComponent{
     render(){
-        const {number}=this.state
+        const {number}=this.props
         let background;
 
         if(number<=10){
