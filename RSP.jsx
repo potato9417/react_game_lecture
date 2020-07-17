@@ -31,11 +31,16 @@ const RSP=()=>{
 
     // useEffect사용
     React.useEffect(()=>{ // => componentDidMount, componentDidUpdate 역할을 해줌(1대1 대응은 아님)
+        console.log("다시실행")
         interval.current=setInterval(changeHand,100)
         return()=>{ // => componentWillUnmount 역할
+            console.log("종료")
             clearInterval(interval.current)
         }
-    },[imgCoord]) // 클로저 문제같은 것을 해결해줌
+    },[imgCoord]) // 클로저 문제같은 것을 해결해줌 => function component는 매번 전체를 다시 실행하므로
+    // [] : 처음에만 실행하고 나중에 다시 실행하지않는다. => componentDidMount 역할
+    // [imgCoord] : imgCoord는 다시 실행한다. => componentDidUpdate 역할
+    // state마다 다른 이펙트를 주고싶을떄 useEffect를 여러번 사용하기도함
 
     const changeHand=()=>{
         if(imgCoord===rspCoords.rock){
