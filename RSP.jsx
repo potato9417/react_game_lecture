@@ -27,11 +27,17 @@ const RSP=()=>{
     const [result,setResult]=React.useState("")
     const [score,setScore]=React.useState(0)
     const [imgCoord,setImgCoord]=React.useState(rspCoords.rock)
-    const interval = useRef();
+    const interval = React.useRef();
+
+    // useEffect사용
+    React.useEffect(()=>{ // => componentDidMount, componentDidUpdate 역할을 해줌(1대1 대응은 아님)
+        interval.current=setInterval(changeHand,100)
+        return()=>{ // => componentWillUnmount 역할
+            clearInterval(interval.current)
+        }
+    },[imgCoord]) // 클로저 문제같은 것을 해결해줌
 
     const changeHand=()=>{
-        const {imgCoord}=this.state
-        console.log(imgCoord)
         if(imgCoord===rspCoords.rock){
             // console.log("바위",imgCoord)
             setImgCoord(rspCoords.scissor)
@@ -61,11 +67,11 @@ const RSP=()=>{
         }
         else if([-1,2].includes(diff)){
             setResult("졌습니다.")
-            setScore((prevScore)=>{prevScore-1})
+            setScore((prevScore)=>prevScore-1)
         }
         else {
             setResult("이겼습니다.")
-            setScore((prevScore)=>{prevScore+1})
+            setScore((prevScore)=>prevScore+1)
         }
         setTimeout(() => {
             interval.current=setInterval(changeHand,100)
