@@ -51,14 +51,15 @@ const Lotto=()=>{
     // return()=>{}이 있으면 componentWillUnmount 역할 수행
     
 
-    const clickRandom=()=>{
+    const clickRandom=React.useCallback(()=>{
+        console.log(winNums)
         console.log("click")
         setWinNums(getNums())
         setWinBalls([])
         setBonus(null)
         setShowBtn(false)
         timeouts.current=[]
-    }
+    },[winNums]) // useCallback => 복잡함 함수 그 자체를 기억 => 변화할 state값을 체크해줘야한다 => winNums의 값을 계속 기억하고있으므로 변화할수있게 체크해야함
 
 
     return(
