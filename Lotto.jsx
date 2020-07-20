@@ -20,21 +20,21 @@ class Lotto extends React.Component{
         showBtn:false
     }
 
-    clickRandom=()=>{}
+    timeouts=[];
 
     componentDidMount(){
         const {winNums}=this.state
         // 비동기와 let을 함께 쓰면 클로저 문제발생하지않음
         for(let i=0;i<winNums.length-1;i++){
-            setTimeout(()=>{
-                this.setState((prevState)=>{
-                    return{
-                        winBalls:[...prevState.winBalls,winNums[i]]
+            this.timeouts[i]=setTimeout(()=>{
+                this.setState(prebState=>{
+                    return {
+                        winBalls:[...prebState.winBalls,winNums[i]]
                     }
                 })
             },(i+1)*1000)
         }
-        setTimeout(()=>{
+        this.timeouts[6]=setTimeout(()=>{
             this.setState({
                 bonus:winNums[6],
                 showBtn:true
@@ -42,6 +42,46 @@ class Lotto extends React.Component{
         },7000)
     }
 
+    componentDidUpdate(prevProps,prevState){
+        if(prevState.winNums!==this.state.winNums){
+            const {winNums}=this.state
+            // 비동기와 let을 함께 쓰면 클로저 문제발생하지않음
+            for(let i=0;i<winNums.length-1;i++){
+                this.timeouts[i]=setTimeout(()=>{
+                    this.setState(prebState=>{
+                        return {
+                            winBalls:[...prebState.winBalls,winNums[i]]
+                        }
+                    })
+                },(i+1)*1000)
+            }
+            this.timeouts[6]=setTimeout(()=>{
+                this.setState({
+                    bonus:winNums[6],
+                    showBtn:true
+                })
+            },7000)
+        }
+        
+    }
+    
+    componentWillUnmount(){
+        this.timeouts.forEach(v=>{
+            clearTimeout(v)
+        })
+    }
+
+    clickRandom=()=>{
+        console.log("click")
+        this.setState({
+            winNums:getNums(),
+            winBalls:[],
+            bonus:null,
+            showBtn:false
+        })
+        this.timeouts=[]
+    }
+    
     render(){
         const {winNums,winBalls,bonus,showBtn}=this.state
         console.log(winBalls,bonus)
@@ -54,7 +94,7 @@ class Lotto extends React.Component{
                     <h4>보너스!</h4>
                     {bonus&&<Ball number={bonus} />}
                 </div>
-                <button onClick={showBtn?this.clickRandom:()=>{}}>한번 더?</button>
+                {showBtn&&<button onClick={this.clickRandom}>한번 더!</button>}
 
             </div>
 
