@@ -19,6 +19,34 @@ const Lotto=()=>{
     const [showBtn,setShowBtn]=React.useState(false)
     const timeouts=React.useRef([])
 
+    React.useEffect(()=>{
+        console.log("useEffect",winNums)
+        for(let i=0;i<winNums.length-1;i++){
+            console.log("i : ",i," winNUm : ",winNums[i])
+            timeouts.current[i]=setTimeout(()=>{
+                console.log("안에있음","i : ",i," winNUm : ",winNums[i])
+                setWinBalls((prevBalls)=>[...prevBalls,winNums[i]])
+            },(i+1)*1000)
+
+            console.log(winBalls)
+        }
+    
+        timeouts.current[6]=setTimeout(()=>{
+            setBonus(winNums[6])
+            setShowBtn(true)
+        },7000)
+
+        return()=>{
+            timeouts.current.forEach(v=>{
+                clearTimeout(v)
+            })
+        }
+    },[winNums.length!==7]) 
+    // 배열에 요소가 없으면 componentDidMount와 동일
+    // 배열에 요소가 있으면 componentDidMount와 componentDidUpdate 둘다 수행
+    // return()=>{}이 있으면 componentWillUnmount 역할 수행
+    
+
     const clickRandom=()=>{
         console.log("click")
         setWinNums(getNums())
@@ -34,81 +62,13 @@ const Lotto=()=>{
             <h2>로또추첨기</h2>
             <div>
                 <h3>당첨숫자</h3>
-                {winBalls.map(props=><Ball key={props} number={props} />)}
+                {winBalls.map(value=><Ball key={value} number={value} />)}
                 <h4>보너스!</h4>
                 {bonus&&<Ball number={bonus} />}
             </div>
             {showBtn&&<button onClick={clickRandom}>한번 더!</button>}
         </div>
     )
-}
-class Lotto extends React.Component{
-    state={
-        winNums:getNums(), // 당첨번호
-        winBalls:[],
-        bonus:null, // 보너스 공
-        showBtn:false
-    }
-
-    timeouts=[];
-
-    runtTimeouts=()=>{
-        const {winNums}=this.state
-        // 비동기와 let을 함께 쓰면 클로저 문제발생하지않음
-        for(let i=0;i<winNums.length-1;i++){
-            this.timeouts[i]=setTimeout(()=>{
-                this.setState(prebState=>{
-                    return {
-                        winBalls:[...prebState.winBalls,winNums[i]]
-                    }
-                })
-            },(i+1)*1000)
-        }
-        this.timeouts[6]=setTimeout(()=>{
-            this.setState({
-                bonus:winNums[6],
-                showBtn:true
-            })
-        },7000)
-    }
-
-    componentDidMount(){
-        this.runtTimeouts()
-    }
-
-    componentDidUpdate(prevProps,prevState){
-        if(prevState.winNums!==this.state.winNums){
-            this.runtTimeouts()
-        }
-        
-    }
-    
-    componentWillUnmount(){
-        this.timeouts.forEach(v=>{
-            clearTimeout(v)
-        })
-    }
-
-    
-    
-    render(){
-        const {winNums,winBalls,bonus,showBtn}=this.state
-        console.log(winBalls,bonus)
-        return(
-            <div>
-                <h2>로또추첨기</h2>
-                <div>
-                    <h3>당첨숫자</h3>
-                    {winBalls.map(props=><Ball key={props} number={props} />)}
-                    <h4>보너스!</h4>
-                    {bonus&&<Ball number={bonus} />}
-                </div>
-                {showBtn&&<button onClick={this.clickRandom}>한번 더!</button>}
-
-            </div>
-
-        )
-    }
 }
 
 module.exports=Lotto
