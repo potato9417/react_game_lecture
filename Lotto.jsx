@@ -12,6 +12,36 @@ const getNums=()=>{
     return [...winNums,BonusNum]
 }
 
+const Lotto=()=>{
+    const [winNums,setWinNums]=React.useState(getNums())
+    const [winBalls,setWinBalls]=React.useState([])
+    const [bonus,setBonus]=React.useState(null)
+    const [showBtn,setShowBtn]=React.useState(false)
+    const timeouts=React.useRef([])
+
+    const clickRandom=()=>{
+        console.log("click")
+        setWinNums(getNums())
+        setWinBalls([])
+        setBonus(null)
+        setShowBtn(false)
+        timeouts.current=[]
+    }
+
+
+    return(
+        <div>
+            <h2>로또추첨기</h2>
+            <div>
+                <h3>당첨숫자</h3>
+                {winBalls.map(props=><Ball key={props} number={props} />)}
+                <h4>보너스!</h4>
+                {bonus&&<Ball number={bonus} />}
+            </div>
+            {showBtn&&<button onClick={clickRandom}>한번 더!</button>}
+        </div>
+    )
+}
 class Lotto extends React.Component{
     state={
         winNums:getNums(), // 당첨번호
@@ -22,7 +52,7 @@ class Lotto extends React.Component{
 
     timeouts=[];
 
-    componentDidMount(){
+    runtTimeouts=()=>{
         const {winNums}=this.state
         // 비동기와 let을 함께 쓰면 클로저 문제발생하지않음
         for(let i=0;i<winNums.length-1;i++){
@@ -42,25 +72,13 @@ class Lotto extends React.Component{
         },7000)
     }
 
+    componentDidMount(){
+        this.runtTimeouts()
+    }
+
     componentDidUpdate(prevProps,prevState){
         if(prevState.winNums!==this.state.winNums){
-            const {winNums}=this.state
-            // 비동기와 let을 함께 쓰면 클로저 문제발생하지않음
-            for(let i=0;i<winNums.length-1;i++){
-                this.timeouts[i]=setTimeout(()=>{
-                    this.setState(prebState=>{
-                        return {
-                            winBalls:[...prebState.winBalls,winNums[i]]
-                        }
-                    })
-                },(i+1)*1000)
-            }
-            this.timeouts[6]=setTimeout(()=>{
-                this.setState({
-                    bonus:winNums[6],
-                    showBtn:true
-                })
-            },7000)
+            this.runtTimeouts()
         }
         
     }
@@ -71,16 +89,7 @@ class Lotto extends React.Component{
         })
     }
 
-    clickRandom=()=>{
-        console.log("click")
-        this.setState({
-            winNums:getNums(),
-            winBalls:[],
-            bonus:null,
-            showBtn:false
-        })
-        this.timeouts=[]
-    }
+    
     
     render(){
         const {winNums,winBalls,bonus,showBtn}=this.state
