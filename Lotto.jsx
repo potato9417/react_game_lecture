@@ -2,6 +2,7 @@ const React=require("react")
 const Ball=require("./Ball")
 
 const getNums=()=>{
+    console.log("getNUm")
     const nums=Array(45).fill().map((current,index)=>index+1)
     const shuffle=[]
     while(nums.length>0){
@@ -13,7 +14,10 @@ const getNums=()=>{
 }
 
 const Lotto=()=>{
-    const [winNums,setWinNums]=React.useState(getNums())
+    // useMemo => 복잡함 함수의 결과값을 기억
+    // useRef => 일반 값을 기억
+    const lottoNums=React.useMemo(()=>getNums(),[])
+    const [winNums,setWinNums]=React.useState(lottoNums)
     const [winBalls,setWinBalls]=React.useState([])
     const [bonus,setBonus]=React.useState(null)
     const [showBtn,setShowBtn]=React.useState(false)
@@ -41,7 +45,7 @@ const Lotto=()=>{
                 clearTimeout(v)
             })
         }
-    },[winNums.length!==7]) 
+    },[timeouts.current]) 
     // 배열에 요소가 없으면 componentDidMount와 동일
     // 배열에 요소가 있으면 componentDidMount와 componentDidUpdate 둘다 수행
     // return()=>{}이 있으면 componentWillUnmount 역할 수행
