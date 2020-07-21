@@ -9,6 +9,7 @@ const NumberBaseball = require("./NumberBaseball")
 const ResponseCheck = require("./ResponseCheck")
 const RSP = require("./RSP")
 const Lotto =require("./Lotto")
+const TicTacToe =require("./TicTacToe")
 
 
 const App=()=>{
@@ -22,6 +23,7 @@ const App=()=>{
             <Route path="/response_check" component={ResponseCheck} />
             <Route path="/rsp" component={RSP} />
             <Route path="/lotto" component={Lotto}/>
+            <Route path="/tictactoe" component={TicTacToe}/>
         </BrowserRouter>
     )
 }

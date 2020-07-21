@@ -11,6 +11,7 @@ const Nav=()=>{
             <Link to="/response_check">반응속도체크</Link>
             <Link to="/rsp">가위바위보</Link>
             <Link to="/lotto">로또추첨기</Link>
+            <Link to="/tictactoe">틱택토</Link>
         </div>
     )
 }
