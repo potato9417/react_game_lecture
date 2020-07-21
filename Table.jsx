@@ -1,10 +1,11 @@
 const React =require("react")
 const Tr = require("./Tr")
 
-const Table=({onClick})=>{
+const Table=({onClick,tableData})=>{
     return (
         <table onClick={onClick}>
-            <Tr>{}</Tr>
+            {/* {Array(tableData.length).fill().map(tr=><Tr/>)} */}
+            <Tr/>
         </table>
     )
 }

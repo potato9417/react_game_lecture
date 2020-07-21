@@ -3,7 +3,9 @@ const Td =require("./Td")
 
 const Tr=()=>{
     return (
-        <Td>{}</Td>
+        <tr>
+            <Td>{}</Td>
+        </tr>
     )
 }
 

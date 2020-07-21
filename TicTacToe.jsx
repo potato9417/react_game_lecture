@@ -24,6 +24,7 @@ const TicTacToe=()=>{
     // state를 직접 수정할수 없고 이벤트가 발생했을떄 action을 dispatch해서 state를 변경해주도록 함 => action의 행동을 reducer에 저장
 
     const tableClick=React.useCallback(()=>{
+        console.log(state.winner)
         dispatch({type:SET_WINNER,winner:"O"})
     },[])
 
