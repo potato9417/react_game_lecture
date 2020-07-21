@@ -1,9 +1,11 @@
 const React =require("react")
 const Tr = require("./Tr")
 
-const Table=()=>{
+const Table=({onClick})=>{
     return (
-        <Tr>{}</Tr>
+        <table onClick={onClick}>
+            <Tr>{}</Tr>
+        </table>
     )
 }
 
